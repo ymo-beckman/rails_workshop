@@ -7,9 +7,11 @@ class RegistrationsController < ApplicationController
       @user = User.new(user_params)
 
       if @user.save
-        session[:user_id] = @user.id
+        @user.user_profile = UserProfile.new
+        @user.user_profile.save
 
-        redirect_to root_path
+        session[:user_id] = @user.id
+        redirect_to edit_user_profile_path(@user.user_profile), notice: 'Successfully create account'
       else
         render :new
       end
