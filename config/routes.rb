@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'contacts/index'
   root 'chats#index'
 
   get 'sign_up', to: 'registrations#new'
@@ -9,4 +10,14 @@ Rails.application.routes.draw do
   delete 'logout', to: "sessions#destroy"
 
   resources :user_profiles
+  resources :contacts
+
+  namespace :api do
+    namespace :v1 do
+      resources :contacts
+      resources :messages
+
+      get 'messages/users/:id', to: 'messages#show'
+    end
+  end
 end

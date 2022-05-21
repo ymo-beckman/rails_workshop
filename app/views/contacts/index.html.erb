@@ -1,0 +1,50 @@
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<table id="contact_list" class="table caption-top">
+  <caption>List of users</caption>
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">User name</th>
+    <th scope="col">Add to contact</th>
+  </tr>
+  </thead>
+  <tbody id="contact_table_body">
+  <% @none_friend_users.each do |user| %>
+    <tr id="none_contact_user_<%= user.user_id %>">
+      <th scope="row"><%= user.user_id %></th>
+      <td><%= "#{user.first_name} #{user.last_name}" %></td>
+      <td><button type="button" class="btn-secondary" onclick="addContact(<%= user.user_id %>)">Add to contact</button></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<script type="text/javascript">
+    const currentUserid = <%= Current.user.id %>;
+    function addContact(targetUserId) {
+        createContact(currentUserid, targetUserId);
+    }
+
+    function removeContact(userId) {
+        let contactContainers = document.getElementById("contact_table_body");
+
+        let contactLine = document.getElementById("none_contact_user_" + userId);
+
+        contactContainers.removeChild(contactLine);
+    }
+
+    function createContact(userId, contactId) {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: userId, contact_id: contactId })
+        };
+
+        fetch('/api/v1/contacts', requestOptions)
+            .then(() => removeContact(contactId));
+    }
+</script>
