@@ -1,24 +1,10 @@
-# README
+# 创建项目
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+新建项目， 已创建
+```
+rails new rails_workshop
+```
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# 步骤 (steps目录)
+- 主页
+- 用户管理

@@ -67,6 +67,7 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    bcrypt (3.1.17-java)
     bindex (0.8.1)
     builder (3.2.4)
     capybara (3.35.3)
@@ -206,6 +207,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-jdbcsqlite3-adapter
+  bcrypt (~> 3.1.7)
   capybara (>= 3.26)
   jbuilder (~> 2.7)
   listen (~> 3.3)

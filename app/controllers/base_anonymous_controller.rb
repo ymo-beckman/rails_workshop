@@ -1,0 +1,2 @@
+class BaseAnonymousController < ApplicationController
+end
