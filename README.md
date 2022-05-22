@@ -11,3 +11,4 @@ rails new rails_workshop
 - 用户信息
 - 联系人
 - 聊天，消息
+- 用户在线状态

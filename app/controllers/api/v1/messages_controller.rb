@@ -1,6 +1,9 @@
 class Api::V1::MessagesController < ActionController::API
   def show
     begin
+      current_second = Time.now.to_i
+      Rails.cache.write("user_last_request_#{params[:id]}", current_second)
+
       10.times do
         if params[:last_message_id].present?
           @messages = Message.where('id > ?', params[:last_message_id])

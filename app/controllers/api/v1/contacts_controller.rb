@@ -6,13 +6,19 @@ class Api::V1::ContactsController < ActionController::API
   end
 
   def show
+    current_second = Time.now.to_i
+    Rails.cache.write("user_last_request_#{params[:id]}", current_second)
+
     @contacts = Contact.where(user_id: params[:id]).map do |contact|
       user_profile = contact.contact.user_profile
+
+      contact_last_request = Rails.cache.read("user_last_request_#{contact.contact.id}")
 
       {
         contact_id: contact.contact.id,
         user_name: "#{user_profile.first_name} #{user_profile.last_name}",
-        avatar_url: user_profile.avatar_url
+        avatar_url: user_profile.avatar_url,
+        online: contact_last_request.present? && (current_second - contact_last_request) < 4.1
       }
     end
 

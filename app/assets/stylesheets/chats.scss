@@ -43,3 +43,14 @@ body{margin-top:20px;}
 .border-top {
   border-top: 1px solid #dee2e6!important;
 }
+
+.gray-avatar {
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+
+  filter: grayscale(100%);
+
+  filter: gray;
+}

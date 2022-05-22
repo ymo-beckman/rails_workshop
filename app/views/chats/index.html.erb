@@ -146,7 +146,7 @@
         chatHeaderName.innerText = name;
     }
 
-    function updateContact(userId, userName, avatarURL) {
+    function updateContact(userId, userName, avatarURL, isOnline) {
         // <a href="#" class="list-group-item list-group-item-action border-0">
         // 	<div class="badge bg-success float-right">5</div>
         // 	<div class="d-flex align-items-start">
@@ -190,7 +190,12 @@
             avatarImg.setAttribute("alt", userName);
             avatarImg.width = 40;
             avatarImg.height = 40;
-            avatarImg.className = "rounded-circle mr-1";
+            if (isOnline) {
+                avatarImg.className = "rounded-circle mr-1";
+            } else {
+                avatarImg.className = "rounded-circle mr-1 gray-avatar";
+            }
+
             contactDiv.appendChild(avatarImg);
 
             let nameDiv = document.createElement("div");
@@ -208,7 +213,7 @@
             .then(function (data) {
                 cleanContactList();
 
-                data.map(contact => updateContact(contact.contact_id, contact.user_name, contact.avatar_url));
+                data.map(contact => updateContact(contact.contact_id, contact.user_name, contact.avatar_url, contact.online));
 
                 data.forEach(contact => {
                     contactMap[contact.contact_id] = contact;
@@ -227,7 +232,7 @@
             .then(function (data) {
                 cleanContactList();
 
-                data.map(contact => updateContact(contact.contact_id, contact.user_name, contact.avatar_url));
+                data.map(contact => updateContact(contact.contact_id, contact.user_name, contact.avatar_url, contact.online));
 
                 data.forEach(contact => {
                     contactMap[contact.contact_id] = contact;
@@ -389,6 +394,6 @@
 
         backendFetchMessages();
 
-        setInterval(refreshContactList, 20000);
+        setInterval(refreshContactList, 5000);
     };
 </script>
